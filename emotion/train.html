@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表情识别模型训练系统</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            background: linear-gradient(90deg, #e94560, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .panel {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .panel h2 {
+            color: #e94560;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            background: #000;
+            margin-bottom: 20px;
+        }
+
+        #video {
+            width: 100%;
+            height: auto;
+            display: block;
+            transform: scaleX(-1);
+        }
+
+        #captureCanvas {
+            display: none;
+        }
+
+        .emotion-selector {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .emotion-btn {
+            padding: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .emotion-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .emotion-btn.active {
+            border-color: #e94560;
+            background: rgba(233, 69, 96, 0.2);
+        }
+
+        .emotion-btn .label {
+            display: block;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #e94560, #ff6b6b);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(233, 69, 96, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .dataset-info {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .dataset-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .dataset-item {
+            text-align: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .dataset-item .count {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e94560;
+        }
+
+        .dataset-item .label {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .training-section {
+            margin-top: 20px;
+        }
+
+        .training-params {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .param-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .param-group label {
+            color: #888;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .param-group input, .param-group select {
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .progress-container {
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e94560, #ff6b6b);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: #888;
+        }
+
+        .logs {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            margin-top: 20px;
+        }
+
+        .logs .log-entry {
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+
+        .logs .log-entry.error {
+            color: #ff7675;
+        }
+
+        .logs .log-entry.success {
+            color: #00b894;
+        }
+
+        .model-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .status-badge {
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        .status-badge.ready {
+            background: rgba(0, 184, 148, 0.2);
+            color: #00b894;
+        }
+
+        .status-badge.training {
+            background: rgba(253, 203, 110, 0.2);
+            color: #fdcb6e;
+        }
+
+        .status-badge.not-ready {
+            background: rgba(255, 118, 117, 0.2);
+            color: #ff7675;
+        }
+
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .emotion-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .dataset-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 表情识别深度学习训练系统</h1>
+            <p>使用 TensorFlow.js 在浏览器中本地训练 CNN 模型</p>
+        </header>
+
+        <div class="main-content">
+            <div class="panel">
+                <h2>📸 数据收集</h2>
+                
+                <div class="video-container">
+                    <video id="video" autoplay muted playsinline></video>
+                </div>
+                <canvas id="captureCanvas" width="96" height="96"></canvas>
+
+                <div class="emotion-selector">
+                    <div class="emotion-btn" data-emotion="neutral">
+                        😐
+                        <span class="label">平静</span>
+                    </div>
+                    <div class="emotion-btn" data-emotion="happy">
+                        😊
+                        <span class="label">开心</span>
+                    </div>
+                    <div class="emotion-btn" data-emotion="sad">
+                        😢
+                        <span class="label">悲伤</span>
+                    </div>
+                    <div class="emotion-btn" data-emotion="angry">
+                        😠
+                        <span class="label">愤怒</span>
+                    </div>
+                    <div class="emotion-btn" data-emotion="surprised">
+                        😲
+                        <span class="label">惊讶</span>
+                    </div>
+                    <div class="emotion-btn" data-emotion="fearful">
+                        😨
+                        <span class="label">恐惧</span>
+                    </div>
+                    <div class="emotion-btn" data-emotion="disgusted">
+                        🤢
+                        <span class="label">厌恶</span>
+                    </div>
+                    <div class="emotion-btn" data-emotion="contempt">
+                        😏
+                        <span class="label">轻蔑</span>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="btn btn-primary" id="captureBtn">📷 拍摄样本</button>
+                    <button class="btn btn-secondary" id="autoCaptureBtn">▶️ 自动采集</button>
+                </div>
+
+                <div class="dataset-info">
+                    <h3>数据集统计</h3>
+                    <div class="dataset-grid" id="datasetGrid">
+                        <!-- 动态生成 -->
+                    </div>
+                    <div style="margin-top: 15px; text-align: center;">
+                        <button class="btn btn-secondary" id="clearDataBtn">🗑️ 清空数据</button>
+                        <button class="btn btn-secondary" id="exportDataBtn">💾 导出数据</button>
+                        <button class="btn btn-secondary" id="importDataBtn">📁 导入数据</button>
+                        <input type="file" id="importFile" accept=".json" style="display: none;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>🚀 模型训练</h2>
+
+                <div class="model-status">
+                    <span>模型状态</span>
+                    <span class="status-badge not-ready" id="modelStatus">未训练</span>
+                </div>
+
+                <div class="training-params">
+                    <div class="param-group">
+                        <label>训练轮数 (Epochs)</label>
+                        <input type="number" id="epochsInput" value="50" min="10" max="200">
+                    </div>
+                    <div class="param-group">
+                        <label>批次大小 (Batch Size)</label>
+                        <select id="batchSizeInput">
+                            <option value="8">8</option>
+                            <option value="16" selected>16</option>
+                            <option value="32">32</option>
+                        </select>
+                    </div>
+                    <div class="param-group">
+                        <label>学习率 (Learning Rate)</label>
+                        <select id="learningRateInput">
+                            <option value="0.001">0.001</option>
+                            <option value="0.0001" selected>0.0001</option>
+                            <option value="0.00001">0.00001</option>
+                        </select>
+                    </div>
+                    <div class="param-group">
+                        <label>验证比例</label>
+                        <select id="validationSplitInput">
+                            <option value="0.1">10%</option>
+                            <option value="0.2" selected>20%</option>
+                            <option value="0.3">30%</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="btn btn-primary" id="trainBtn">🚀 开始训练</button>
+                    <button class="btn btn-secondary" id="stopTrainBtn" disabled>⏹️ 停止训练</button>
+                </div>
+
+                <div class="progress-container" id="progressContainer" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">准备训练...</div>
+                </div>
+
+                <div class="logs" id="logs"></div>
+
+                <div style="margin-top: 20px; display: flex; gap: 10px;">
+                    <button class="btn btn-secondary" id="saveModelBtn" disabled>💾 保存模型</button>
+                    <button class="btn btn-secondary" id="loadModelBtn">📂 加载模型</button>
+                    <input type="file" id="modelFile" accept=".json" style="display: none;">
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="index.html" class="btn btn-secondary">🏠 返回识别页面</a>
+        </div>
+    </div>
+
+    <script src="train.js"></script>
+</body>
+</html>

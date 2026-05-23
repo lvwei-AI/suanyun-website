@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算云信息展示平台</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 粒子背景 -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- 导航 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">◆</span>
+                <span class="logo-text">算云信息</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link">首页</a></li>
+                <li><a href="#about" class="nav-link">关于我们</a></li>
+                <li><a href="#services" class="nav-link">服务范围</a></li>
+                <li><a href="#campus" class="nav-link">校园实践</a></li>
+                <li><a href="ai-advisor.html" class="nav-link">智能顾问</a></li>
+                <li><a href="#contact" class="nav-link">联系方式</a></li>
+            </ul>
+            <!-- 日夜模式切换按钮 -->
+            <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 首页Hero -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">专业 · 高效 · 创新</div>
+            <h1 class="hero-title">
+                <span class="title-line">算云信息展示平台</span>
+                <span class="title-sub">为您的数字化转型保驾护航</span>
+            </h1>
+            <p class="hero-desc">专注于软件开发、人工智能应用、网络与信息安全领域，提供全方位的技术解决方案</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary">
+                    <span>了解服务</span>
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <span>联系我们</span>
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span>向下滚动</span>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">ABOUT US</span>
+                <h2 class="section-title">关于我们</h2>
+                <p class="section-subtitle">正规注册 · 专业团队 · 品质保障</p>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                        </svg>
+                    </div>
+                    <h3>企业资质</h3>
+                    <div class="info-list">
+                        <div class="info-row">
+                            <span class="info-label">企业名称</span>
+                            <span class="info-value">哈尔滨市松北区算云软件开发工作室</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">统一社会信用代码</span>
+                            <span class="info-value">92230109MAKCUYD46K</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">类型</span>
+                            <span class="info-value">个体工商户</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">组成形式</span>
+                            <span class="info-value">个人经营</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">注册日期</span>
+                            <span class="info-value">2026年04月21日</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                            <polyline points="2 17 12 22 22 17"/>
+                            <polyline points="2 12 12 17 22 12"/>
+                        </svg>
+                    </div>
+                    <h3>核心优势</h3>
+                    <ul class="feature-list">
+                        <li>
+                            <span class="feature-dot"></span>
+                            <span>正规工商注册，合法合规经营</span>
+                        </li>
+                        <li>
+                            <span class="feature-dot"></span>
+                            <span>专业技术团队，丰富项目经验</span>
+                        </li>
+                        <li>
+                            <span class="feature-dot"></span>
+                            <span>定制化解决方案，满足个性需求</span>
+                        </li>
+                        <li>
+                            <span class="feature-dot"></span>
+                            <span>完善的售后服务体系</span>
+                        </li>
+                        <li>
+                            <span class="feature-dot"></span>
+                            <span>严格的信息安全保障</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务范围 -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header light">
+                <span class="section-tag">SERVICES</span>
+                <h2 class="section-title">服务范围</h2>
+                <p class="section-subtitle">全方位技术解决方案，助力企业数字化转型</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-number">01</div>
+                    <div class="service-content">
+                        <h3>软件开发</h3>
+                        <p>定制化软件系统开发，包括企业管理系统、业务应用系统、移动应用开发等</p>
+                        <ul class="service-tags">
+                            <li>企业软件</li>
+                            <li>移动应用</li>
+                            <li>系统集成</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-number">02</div>
+                    <div class="service-content">
+                        <h3>人工智能应用</h3>
+                        <p>AI技术应用开发，智能算法实现，机器学习模型部署与应用集成</p>
+                        <ul class="service-tags">
+                            <li>AI应用</li>
+                            <li>机器学习</li>
+                            <li>智能算法</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-number">03</div>
+                    <div class="service-content">
+                        <h3>网络与信息安全</h3>
+                        <p>网络安全评估、安全加固、渗透测试、安全运维等全方位安全服务</p>
+                        <ul class="service-tags">
+                            <li>安全评估</li>
+                            <li>渗透测试</li>
+                            <li>安全运维</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-number">04</div>
+                    <div class="service-content">
+                        <h3>网络技术服务</h3>
+                        <p>网络架构设计、网络部署实施、网络优化、技术支持与维护服务</p>
+                        <ul class="service-tags">
+                            <li>网络架构</li>
+                            <li>部署实施</li>
+                            <li>技术维护</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-number">05</div>
+                    <div class="service-content">
+                        <h3>技术咨询与转让</h3>
+                        <p>专业技术咨询服务、技术方案设计、技术成果转化与技术转让</p>
+                        <ul class="service-tags">
+                            <li>技术咨询</li>
+                            <li>方案设计</li>
+                            <li>技术转让</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-number">06</div>
+                    <div class="service-content">
+                        <h3>互联网数据服务</h3>
+                        <p>数据处理、数据分析、数据可视化、大数据平台搭建与运维服务</p>
+                        <ul class="service-tags">
+                            <li>数据处理</li>
+                            <li>数据分析</li>
+                            <li>大数据平台</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目展示 -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header light">
+                <span class="section-tag">PROJECTS</span>
+                <h2 class="section-title">项目展示</h2>
+                <p class="section-subtitle">自主开发项目，技术驱动创新</p>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-item">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3>校有集 — 高校综合服务平台</h3>
+                    </div>
+                    <p>基于微信小程序的二手交易、校园服务、信息发布综合平台，独立完成全栈开发与上线运营</p>
+                    <div class="project-tags">
+                        <span>微信小程序</span>
+                        <span>Node.js</span>
+                        <span>MongoDB</span>
+                        <span>微信云开发</span>
+                    </div>
+                    <div class="project-qr">
+                        <p style="color:#888;font-size:0.85rem;">📱 微信小程序 · 扫码体验</p>
+                        <img src="校有集二维码.jpg" alt="校有集小程序码" style="width:120px;height:120px;border-radius:8px;margin:10px auto 0;display:block;">
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2a10 10 0 0 1 10 10c0 5-4 8-10 8S2 17 2 12 7 2 12 2z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                                <circle cx="12" cy="5" r="1.5"/>
+                                <circle cx="12" cy="19" r="1.5"/>
+                                <circle cx="5" cy="12" r="1.5"/>
+                                <circle cx="19" cy="12" r="1.5"/>
+                            </svg>
+                        </div>
+                        <h3>实时人脸表情识别系统</h3>
+                    </div>
+                    <p>基于 TensorFlow.js + face-api.js 的浏览器端实时表情识别应用，支持 7 类情绪检测与自定义模型训练</p>
+                    <div class="project-tags">
+                        <span>TensorFlow.js</span>
+                        <span>face-api.js</span>
+                        <span>CNN</span>
+                        <span>JavaScript</span>
+                    </div>
+                    <a href="emotion/" class="btn btn-primary" style="margin-top:15px;display:inline-flex;padding:8px 24px;font-size:0.9rem;">
+                        <span>在线体验</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 校园产品实践 -->
+    <section id="campus" class="campus-preview">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">CAMPUS PRODUCTS</span>
+                <h2 class="section-title">校园产品实践</h2>
+                <p class="section-subtitle">基于校园场景的真实产品落地案例</p>
+            </div>
+
+            <div class="projects-grid" style="margin-top:0;">
+                <div class="project-item">
+                    <div class="project-header">
+                        <h3>K&amp;M 校园早餐预定平台</h3>
+                    </div>
+                    <div class="project-tags">
+                        <span>微信小程序</span>
+                        <span>校园O2O</span>
+                        <span>配送服务</span>
+                    </div>
+                    <p>基于微信小程序的校园早餐预约与配送服务，从需求调研到配送运营全流程落地，解决早起排队与食堂拥挤痛点</p>
+                    <div class="project-tags">
+                        <span>累计用户 900+</span>
+                        <span>完成订单 1000+</span>
+                        <span>兼职岗位 2</span>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <h3>云边小卖部</h3>
+                    </div>
+                    <div class="project-tags">
+                        <span>校园零售</span>
+                        <span>即时配送</span>
+                        <span>数据驱动</span>
+                    </div>
+                    <p>校园即时零售服务平台，通过数据驱动运营策略优化，实现 0 元起送 + 免配送费模式验证，建立配货配送协作机制</p>
+                    <div class="project-tags">
+                        <span>累计用户 1,200+</span>
+                        <span>月流水 1-2 万</span>
+                        <span>兼职岗位 4</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI 智能顾问入口 -->
+    <section class="ai-entry">
+        <div class="container">
+            <div class="ai-entry-content">
+                <div class="ai-entry-icon">◆</div>
+                <h2>算云智能顾问</h2>
+                <p class="ai-entry-sub">AI 技术咨询助手</p>
+                <p>
+                    基于 AI 技术的智能咨询入口，为您提供专业的技术方案建议。<br>
+                    无论是项目规划、技术选型还是方案评估，随时为您服务。
+                </p>
+                <div class="ai-entry-tags">
+                    <span>AI 应用开发</span>
+                    <span>小程序开发</span>
+                    <span>软件系统方案</span>
+                    <span>校园平台建设</span>
+                    <span>技术解决方案</span>
+                </div>
+                <a href="ai-advisor.html" class="btn btn-primary btn-large">
+                    <span>开始咨询</span>
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">CONTACT</span>
+                <h2 class="section-title">联系我们</h2>
+                <p class="section-subtitle">期待与您的合作</p>
+            </div>
+
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <div class="contact-detail">
+                            <span class="contact-label">电子邮箱</span>
+                            <span class="contact-value">2022672122@qq.com</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-detail">
+                            <span class="contact-label">官方网站</span>
+                            <span class="contact-value">www.xiaoqintao.com</span>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="contact-cta">
+                    <h3>开启合作</h3>
+                    <p>无论您有任何技术需求，我们都将竭诚为您提供专业的解决方案</p>
+                    <a href="mailto:2022672122@qq.com" class="btn btn-primary btn-large">
+                        <span>发送邮件咨询</span>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">◆</span>
+                    <span>算云信息展示平台</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#home">首页</a>
+                    <a href="#campus">校园实践</a>
+                    <a href="ai-advisor.html">智能顾问</a>
+                    <a href="#contact">联系方式</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>版权所有 © 2026 哈尔滨市松北区算云软件开发工作室</p>
+                <div class="beian-links">
+                    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=23010902010456" rel="noreferrer" target="_blank" class="gongan-beian">
+                        <img src="备案图标.png" alt="公安备案" class="gongan-icon">
+                        <span>黑公网安备23010902010456号</span>
+                    </a>
+                    <span class="beian-divider">|</span>
+                    <a href="https://beian.miit.gov.cn/" target="_blank">黑ICP备2026004899号-1</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // 跨页面锚点导航平滑滚动
+        if (window.location.hash) {
+            setTimeout(() => {
+                const target = document.querySelector(window.location.hash);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 200);
+        }
+    </script>
+</body>
+</html>

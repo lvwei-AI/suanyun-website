@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算云智能顾问 - 算云信息展示平台</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 粒子背景 -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- 导航 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">◆</span>
+                <span class="logo-text">算云信息</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">首页</a></li>
+                <li><a href="index.html#about" class="nav-link">关于我们</a></li>
+                <li><a href="index.html#services" class="nav-link">服务范围</a></li>
+                <li><a href="index.html#campus" class="nav-link">校园实践</a></li>
+                <li><a href="ai-advisor.html" class="nav-link active">智能顾问</a></li>
+                <li><a href="index.html#contact" class="nav-link">联系方式</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 - 页面头部 -->
+    <section class="hero" style="min-height:auto;padding:120px 40px 60px;">
+        <div class="hero-content">
+            <div class="hero-badge">AI · 智能 · 高效</div>
+            <h1 class="hero-title">
+                <span class="title-line">算云智能顾问</span>
+                <span class="title-sub">AI 技术咨询助手</span>
+            </h1>
+        </div>
+    </section>
+
+    <!-- 对话区域 -->
+    <section style="padding:0 0 120px;position:relative;z-index:1;">
+        <div class="container" style="max-width:800px;">
+            <div class="chat-container" style="height:60vh;min-height:400px;">
+                <div class="chat-messages" id="chatMessages"></div>
+                <div class="chat-input-area">
+                    <div class="chat-input-wrapper">
+                        <input type="text" id="chatInput" class="chat-input" placeholder="输入您的问题..." style="height:auto;padding:14px 16px;line-height:1.5;">
+                        <button id="chatSendBtn" style="flex-shrink:0;padding:14px 28px;background:var(--accent);color:var(--primary);border:none;border-radius:8px;cursor:pointer;font-size:14px;font-family:inherit;letter-spacing:1px;transition:all 0.3s;">发送</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">◆</span>
+                    <span>算云信息展示平台</span>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">首页</a>
+                    <a href="index.html#campus">校园实践</a>
+                    <a href="ai-advisor.html">智能顾问</a>
+                    <a href="index.html#contact">联系方式</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>版权所有 &copy; 2026 哈尔滨市松北区算云软件开发工作室</p>
+                <div class="beian-links">
+                    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=23010902010456" rel="noreferrer" target="_blank" class="gongan-beian">
+                        <img src="备案图标.png" alt="公安备案" class="gongan-icon">
+                        <span>黑公网安备23010902010456号</span>
+                    </a>
+                    <span class="beian-divider">|</span>
+                    <a href="https://beian.miit.gov.cn/" target="_blank">黑ICP备2026004899号-1</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="ai-advisor.js"></script>
+</body>
+</html>
